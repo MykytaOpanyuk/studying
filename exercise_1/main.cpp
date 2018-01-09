@@ -33,14 +33,16 @@ void get_result(list *head) {
 	if (head->next != NULL)
 		get_result(head->next);
 }
-
+//comments, for testing 
 int main ()
 {
-	for (int i = 0; i < 5; i++) {
+	for (int i = 0; i < 5; i++)
 		new_list = push(new_list, i);
-	}
+
 	get_result(new_list);
 	printf("\n");
+	
 	reverse(new_list);
+	
 	get_result(new_list);
 }
