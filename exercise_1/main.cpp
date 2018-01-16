@@ -1,3 +1,11 @@
+//============================================================================
+// Name        : Test_for_git.cpp
+// Author      : 
+// Version     :
+// Copyright   : Your copyright notice
+// Description : Hello World in C++, Ansi-style
+//============================================================================
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -9,17 +17,33 @@ struct list
 
 list *new_list = NULL;
 
-void reverse(list *head)
+void reverse_rec(list *head)
 {
 	list *timetable = head->next;
 	if (timetable->next != NULL)
-		reverse(timetable);
+		reverse_rec(timetable);
 	else
 		new_list = timetable;
 	timetable->next = head;
 	head->next = NULL;
 }
 
+void reverse_without_rec(list *head)
+{
+	list *timetable = head->next;
+	head->next = NULL;
+	list *another = timetable->next;
+	while (timetable->next != NULL) {
+		timetable->next = head;
+		head = timetable;
+		timetable = another;
+		another = another->next;
+	}
+	if (timetable->next == NULL) {
+		new_list = timetable;
+		timetable->next = head;
+	}
+}
 list *push(list *head, int data) {
 	list *timetable = (list*)malloc(sizeof(list));
 	timetable->data = data;
@@ -33,7 +57,7 @@ void get_result(list *head) {
 	if (head->next != NULL)
 		get_result(head->next);
 }
-//comments, for testing 
+//comments, for testing
 int main ()
 {
 	for (int i = 0; i < 5; i++)
@@ -41,8 +65,9 @@ int main ()
 
 	get_result(new_list);
 	printf("\n");
-	
-	reverse(new_list);
-	
+
+	reverse_without_rec(new_list);
+
 	get_result(new_list);
 }
+
