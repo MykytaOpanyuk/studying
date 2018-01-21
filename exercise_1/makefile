@@ -1,6 +1,6 @@
-CC=g++
+CC=gcc
 CCFLAGS=-Wall
-SOURCES = main.cpp
+SOURCES = main.c
 
 main:
 	$(CC) $(CCFLAGS) -o main $(SOURCES)
